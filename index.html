@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mídia Kit — Kin (João Vitor)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   COMO ATUALIZAR: mude só o bloco DADOS no <script> lá embaixo.
+   Para gerar PDF: Ctrl+P > "Salvar como PDF" (margens: nenhuma, gráficos de fundo: ligado).
+   ===================================================================== */
+:root{--red:#cd0024;--red2:#e0263f;--ink:#1d1d1f;--cream:#fbe3e0;--paper:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e9e4e2;font:16px/1.55 Inter,sans-serif;color:var(--ink)}
+.page{width:min(1000px,100%);margin:32px auto;background:var(--paper);box-shadow:0 20px 60px rgba(0,0,0,.15);overflow:hidden;border-radius:24px}
+h1,h2,h3{font-family:Montserrat,sans-serif;line-height:1.05}
+.fred{font-family:Fredoka,sans-serif}
+/* capa */
+.cover{background:var(--red);color:#fff;display:grid;grid-template-columns:1.2fr 1fr;position:relative;overflow:hidden;min-height:440px}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.14) 1.5px,transparent 1.7px) 0 0/14px 14px}
+.cover .txt{padding:56px 48px;position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center}
+.tag{display:inline-block;font:700 12px Montserrat;letter-spacing:.18em;text-transform:uppercase;background:#fff;color:var(--red);padding:6px 12px;border-radius:999px;margin-bottom:22px;width:max-content}
+.cover h1{font:600 clamp(54px,8vw,92px)/.92 Fredoka}
+.cover p{font-size:19px;margin-top:18px;max-width:420px;opacity:.95}
+.cover .handles{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cover .handles span{font:700 14px Montserrat;background:rgba(0,0,0,.22);padding:8px 14px;border-radius:999px}
+.cover .art{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center}
+.cover .art{padding-top:28px}
+.cover .art::before{content:"";position:absolute;width:min(82%,380px);aspect-ratio:1;border-radius:50%;background:var(--red2);left:50%;top:50%;translate:-50% -46%;box-shadow:0 0 0 14px rgba(255,255,255,.12)}
+.cover .art img{position:relative;height:430px;width:auto;max-width:100%;object-fit:contain;object-position:bottom;margin-bottom:-6px}
+section{padding:48px}
+.sec-h{display:flex;align-items:center;gap:16px;margin-bottom:26px}
+.sec-h h2{font-size:30px;font-weight:800;white-space:nowrap}
+.sec-h .rule{flex:1;height:3px;background:var(--red);border-radius:2px}
+.sec-h img{width:40px}
+/* sobre */
+.about{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center}
+.about .foto{position:relative;width:220px}
+.about .foto>img{width:220px;height:250px;object-fit:cover;object-position:40% 30%;border-radius:18px;border:4px solid var(--ink);box-shadow:8px 8px 0 var(--red)}
+.about .foto .stk{position:absolute;right:-22px;bottom:-18px;width:78px;height:auto;transform:rotate(12deg);filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25))}
+.about p{font-size:17px}
+.about b{color:var(--red)}
+/* números */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{background:var(--cream);border-radius:18px;padding:22px 18px;text-align:center;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--red)}
+.stat .n{font:600 40px/1 Fredoka;color:var(--red)}
+.stat .l{font:700 13px Montserrat;margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.stat .s{font-size:12px;color:#666;margin-top:4px}
+.note{font-size:12px;color:#888;margin-top:14px}
+/* plataformas */
+.plats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plat{border-radius:18px;padding:22px;background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.plat h3{font-size:20px}
+.plat .h{font-size:14px;opacity:.75;margin-top:2px}
+.plat .big{font:600 34px Fredoka;color:#ff6b80;margin-top:14px}
+.plat ul{list-style:none;margin-top:10px;font-size:14px;opacity:.9}
+/* público */
+.aud{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.bar{margin-bottom:14px}
+.bar .lbl{display:flex;justify-content:space-between;font:600 14px Montserrat;margin-bottom:6px}
+.bar .tr{height:14px;background:var(--cream);border-radius:999px;overflow:hidden}
+.bar .tr i{display:block;height:100%;background:var(--red);border-radius:999px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font:700 14px Montserrat;border:2px solid var(--ink);border-radius:999px;padding:7px 14px}
+/* destaques */
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vid{border-radius:16px;overflow:hidden;background:#fff;border:3px solid var(--ink);text-decoration:none;color:inherit}
+.vid img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border-bottom:3px solid var(--ink)}
+.vid div{padding:12px 14px;font:700 14px/1.3 Montserrat}
+.vid small{display:block;font:400 12px Inter;color:#666;margin-top:4px}
+.vid.wide{display:grid;grid-template-columns:1.3fr 1fr;align-items:center}
+.vid.wide img{border-bottom:0;border-right:3px solid var(--ink)}
+.vid.wide div{font-size:20px;padding:22px}
+.vid .pl{color:var(--red);font:700 12px Montserrat;text-transform:uppercase;letter-spacing:.1em;margin:0 0 8px}
+.vids-sh{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
+.sh{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;border:3px solid var(--ink);text-decoration:none;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;transition:transform .2s}
+.sh:hover{transform:translateY(-4px)}
+.sh.ig{background:linear-gradient(160deg,#feda75,#d62976 55%,#4f5bd5)}
+.sh.tt{background:linear-gradient(160deg,#25f4ee,#111 45%,#111 60%,#fe2c55)}
+.sh img{position:absolute;width:85%;left:7.5%;top:22%;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.sh .pl{position:absolute;top:8px;left:8px;font:700 10px Montserrat;background:rgba(0,0,0,.45);padding:3px 7px;border-radius:999px}
+.sh .pt{position:absolute;top:50%;left:50%;translate:-50% 60%;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-size:13px}
+.sh b{position:relative;font:700 13px Montserrat;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+/* serviços */
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{border:3px solid var(--ink);border-radius:18px;padding:22px;background:#fff}
+.card h3{font-size:19px;color:var(--red)}
+.card p{font-size:14px;margin-top:6px;color:#444}
+.card .price{font:700 14px Montserrat;margin-top:12px}
+/* contato */
+.contact{background:var(--red);color:#fff;text-align:center;position:relative;overflow:hidden}
+.contact h2{font:600 46px Fredoka}
+.contact p{margin-top:8px;font-size:17px}
+.contact .row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:24px}
+.contact a{font:700 15px Montserrat;background:#fff;color:var(--red);text-decoration:none;padding:12px 20px;border-radius:999px}
+.contact .upd{font-size:12px;opacity:.75;margin-top:22px}
+.print{position:fixed;right:20px;bottom:20px;font:700 14px Montserrat;background:var(--ink);color:#fff;border:0;padding:14px 20px;border-radius:999px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.resumo{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:22px}
+.resumo div{background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:16px;padding:12px 18px;box-shadow:4px 4px 0 var(--ink)}
+.resumo b{font:600 30px Fredoka;margin-right:8px}
+.resumo span{font:700 14px Montserrat}
+.resumo em{font:600 14px Fredoka;color:#777}
+.redes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rede{border:3px solid var(--ink);border-radius:18px;padding:18px;background:#fff}
+.rede h3{font-size:19px;margin-bottom:6px}.rede h3 small{font:400 13px Inter;color:#777}
+.rede h4{font:700 12px Montserrat;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin:14px 0 8px}
+.rede .bar{margin-bottom:9px}.rede .bar .lbl{font-size:12px}.rede .bar .tr{height:10px}
+.soon{text-align:center;padding:26px 6px}.soon img{width:60px;filter:grayscale(1);opacity:.6;transform:rotate(-12deg)}.soon p{font:600 15px Fredoka;color:#777;margin-top:10px}
+@media(max-width:760px){.redes{grid-template-columns:1fr}}
+/* ===== modo bobão ===== */
+body{background:var(--cream) url('assets/kin-face-sm.webp') 0 0/90px repeat;background-blend-mode:soft-light}
+body::before{content:"";position:fixed;inset:0;background:rgba(251,227,224,.88);z-index:-1}
+.page{border:4px solid var(--ink);box-shadow:12px 12px 0 var(--red)}
+.cover h1{text-shadow:5px 5px 0 rgba(0,0,0,.25);transform:rotate(-2deg)}
+.tag{transform:rotate(-3deg)}
+.bob{animation:bob 2.6s ease-in-out infinite;transform-origin:bottom center}
+@keyframes bob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg) translateY(-6px)}}
+.sticker{position:absolute;z-index:2;font:700 13px/1.15 Montserrat;color:var(--ink);background:#ffe14d;border:3px solid var(--ink);padding:8px 12px;border-radius:12px;box-shadow:4px 4px 0 var(--ink);text-align:center;white-space:nowrap}
+.s1{top:14%;left:2%;transform:rotate(-12deg);background:#fff}
+.s2{top:5%;right:3%;transform:rotate(7deg)}
+.s3{bottom:10%;left:4%;transform:rotate(6deg);background:#8ff0c0}
+.band{background:var(--ink);color:#fff;overflow:hidden;white-space:nowrap;border-block:4px solid var(--ink);transform:rotate(-1.2deg);margin:-6px -10px;position:relative;z-index:2}
+.band-tr{display:inline-flex;align-items:center;gap:22px;padding:12px 0;animation:band 22s linear infinite}
+.band span{font:600 28px Fredoka}
+.band img{width:38px}
+@keyframes band{to{transform:translateX(-50%)}}
+.joke{font:600 15px Fredoka;color:#777;margin:-16px 0 22px;transform:rotate(-1deg);display:inline-block}
+.sec-h h2{font:600 36px Fredoka}
+.wig{animation:wig 1.8s ease-in-out infinite}
+@keyframes wig{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+.tilt{transform:rotate(-5deg);transition:transform .3s}.tilt:hover{transform:rotate(5deg) scale(1.05)}
+.stat:nth-child(odd){transform:rotate(-2deg)}.stat:nth-child(even){transform:rotate(2deg)}
+.stat{transition:transform .25s}.stat:hover{transform:rotate(0) scale(1.08)}
+.plat{transition:transform .25s}.plat:nth-child(2){transform:rotate(1.5deg)}.plat:hover{transform:translateY(-6px) rotate(-2deg)}
+.card{box-shadow:6px 6px 0 var(--red);transition:transform .25s}.card:hover{transform:rotate(-1.5deg) scale(1.02)}
+.chips span{background:#fff;transition:transform .2s}.chips span:hover{transform:rotate(-6deg) scale(1.1)}
+.vid.wide{box-shadow:8px 8px 0 var(--red)}
+.sh:nth-child(odd){transform:rotate(-2deg)}.sh:nth-child(even){transform:rotate(2deg)}.sh:hover{transform:scale(1.06) rotate(0)}
+.contact{padding-bottom:64px}
+.contact h2{transform:rotate(-2deg)}
+.contact a{border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .2s}.contact a:hover{transform:translate(-2px,-2px) rotate(-2deg)}
+.peek{position:absolute;right:-20px;bottom:-30px;width:180px;transform:rotate(-8deg);opacity:.95}
+.print{background:var(--red);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+@media print{.bob,.band-tr,.wig{animation:none}body::before{display:none}.page{border:0;box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.bob,.band-tr,.wig{animation:none}}
+@media(max-width:760px){.sticker{font-size:11px}.peek{width:110px}}
+@media(max-width:760px){.cover,.about,.aud{grid-template-columns:1fr}.cover .art{height:340px}.cover .art img{height:320px}.stats{grid-template-columns:1fr 1fr}.plats,.vids,.svc,.vid.wide{grid-template-columns:1fr}.vids-sh{grid-template-columns:repeat(3,1fr)}section{padding:32px 22px}.about .foto{margin:auto}}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none;border-radius:0;width:100%}.print{display:none}section,.cover{break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="page" id="kit"></div>
+<button class="print" onclick="print()">Baixar PDF 📄</button>
+
+<script>
+/* ======================= DADOS: ATUALIZE AQUI ======================= */
+const A = 'assets/';
+const DADOS = {
+  atualizado: 'novembro de 2026',
+  nome: 'Kin',
+  nomeReal: 'João Vitor',
+  chamada: 'Criador de conteúdo sobre games, humor e nostalgia da internet. Aqui tem meme, gameplay e muito carinho em cada vídeo.',
+  sobre: 'Prazer, eu sou o <b>João</b>, o <b>Kin</b>, tenho <b>21 anos</b> e tô começando minha jornada como criador de conteúdo.<br><br>Desde moleque meu sonho é <b>viver de criar conteúdo</b>, cada vídeo meu é feito <b>do zero por mim</b>, do roteiro à edição final, passando pela thumb, pelo motion e por aquele corte no tempo exato da piada. Eu coloco <b>muito amor e carinho</b> em cada detalhe, porque acredito que é isso que faz alguém parar o scroll e ficar até o fim.<br><br>Meu conteúdo mistura <b>games, humor e nostalgia da internet</b>, com uma edição rápida e cheia de energia, que é a linguagem de quem cresceu online, igual ao meu público.<br><br>Ainda sou pequeno, e é exatamente por isso que vale a pena chegar agora: <b>parceria comigo é tratada com o mesmo cuidado de um vídeo do canal</b>. Sua marca não vira um anúncio jogado no meio, ela sempre vai ser bem editada e do jeitinho que o meu público curte.',
+  // Números gerais (troque os "—" quando tiver os dados)
+  numeros: [
+    { n: '1,6 mil', l: 'Seguidores no total', s: 'YouTube + Instagram + TikTok' },
+    { n: '22 mil', l: 'Views no YouTube', s: 'com só 4 vídeos' },
+    { n: '19,3 mil', l: 'Curtidas no TikTok', s: 'total do perfil' },
+    { n: '+37%', l: 'Espectadores no TikTok', s: '1,3 mil na semana de 16 a 22/nov' }
+  ],
+  plataformas: [
+    { nome: 'TikTok', handle: '@kingjuaum_', numero: '857', unidade: 'seguidores', extras: ['19,3 mil curtidas', 'Cortes, humor e games'] },
+    { nome: 'Instagram', handle: '@kingjuaum', numero: '585', unidade: 'seguidores', extras: ['Jogos | Humor | Nostalgia', 'Reels e bastidores'] },
+    { nome: 'YouTube', handle: '@kingjuaum', numero: '195', unidade: 'inscritos', extras: ['22 mil visualizações (~5,5 mil por vídeo)', 'Público mensal: 429 e crescendo'] }
+  ],
+  // Público por rede. Rede sem dados: deixe idade: [] que aparece "em breve".
+  // Resumo = média das redes com dados.
+  resumo: [ ['75%', 'homens'], ['77%', 'entre 18 e 34 anos'], ['79%', 'do Brasil (Instagram)'] ],
+  publico: [
+    { rede: 'Instagram', obs: 'seguidores', idade: [ ['13–17', 6.6], ['18–24', 41.7], ['25–34', 36.0], ['35+', 15.8] ], genero: [ ['Homens', 77.1], ['Mulheres', 22.9] ] },
+    { rede: 'TikTok', obs: 'espectadores', idade: [ ['18–24', 32.2], ['25–34', 43.2], ['35–44', 17.5], ['45+', 7.1] ], genero: [ ['Homens', 73], ['Mulheres', 25], ['Outro', 2] ] },
+    { rede: 'YouTube', obs: '', idade: [], genero: [] }
+  ],
+  fonte: 'Dados tirados do Instagram e do TikTok em novembro de 2026. O YouTube ainda não mostra dados de público pra canais pequenos.',
+  paises: ['Brasil · 78,6%'],
+  temas: ['Games', 'Humor', 'Nostalgia', 'Creepypastas'],
+  // plat: 'yt' | 'ig' | 'tt'. YouTube puxa a thumb sozinho; os outros usam a arte do Kin.
+  destaques: [
+    { plat: 'yt', url: 'https://www.youtube.com/watch?v=v0AgASAHciE', id: 'v0AgASAHciE', titulo: 'Explorando creepypastas antigas pra ver se elas realmente eram assustadoras' },
+    { plat: 'ig', url: 'https://www.instagram.com/reel/DUefXBHAN4N/', titulo: 'Reel 1' },
+    { plat: 'ig', url: 'https://www.instagram.com/reel/DUY99NsgHn5/', titulo: 'Reel 2' },
+    { plat: 'ig', url: 'https://www.instagram.com/reel/DZNsU-qgty4/', titulo: 'Reel 3' },
+    { plat: 'ig', url: 'https://www.instagram.com/reel/DZz-YgIABSq/', titulo: 'Reel 4' },
+    { plat: 'tt', url: 'https://www.tiktok.com/@kingjuaum_/video/7606394037670513928', titulo: 'TikTok 1' },
+    { plat: 'tt', url: 'https://www.tiktok.com/@kingjuaum_/video/7647971017901493525', titulo: 'TikTok 2' }
+  ],
+  servicos: [
+    { t: 'Integração em vídeo longo', d: 'Menção de 30 a 60 s dentro do vídeo, editada no estilo do canal, com link na descrição e comentário fixado.', p: 'A combinar' },
+    { t: 'Vídeo curto dedicado', d: 'Reel, Short ou TikTok feito para a marca, com roteiro e edição meus.', p: 'A combinar' },
+    { t: 'Stories / divulgação', d: 'Sequência de stories ou post divulgando produto, evento ou lançamento.', p: 'A combinar' }
+  ],
+  contato: {
+    email: 'kingjaumcontato@gmail.com',
+    portfolio: 'https://kingjuaum.github.io/Kin-Portfolio/',
+    instagram: 'https://www.instagram.com/kingjuaum/'
+  }
+};
+/* ==================================================================== */
+
+const D = DADOS, sec = (t, html, joke) => `<section><div class="sec-h"><h2>${t}</h2><span class="rule"></span><img class="wig" src="${A}kin-face-sm.webp" alt=""></div>${joke ? `<p class="joke">${joke}</p>` : ''}${html}</section>`;
+const band = (items) => { const one = items.map(t => `<span>${t}</span><img src="${A}kin-face-sm.webp" alt="">`).join(''); return `<div class="band"><div class="band-tr">${one}${one}${one}${one}</div></div>`; };
+const bars = arr => arr.map(([l, v]) => `<div class="bar"><div class="lbl"><span>${l}</span><span>${v ? v.toLocaleString('pt-BR') + '%' : '—'}</span></div><div class="tr"><i style="width:${v}%"></i></div></div>`).join('');
+document.getElementById('kit').innerHTML = `
+<header class="cover">
+  <div class="txt">
+    <span class="tag">Mídia Kit oficial™ · ${D.atualizado}</span>
+    <h1>Olá, eu sou o ${D.nome}!</h1>
+    <p>${D.chamada}</p>
+    <div class="handles">${D.plataformas.map(p => `<span>${p.nome} · ${p.handle}</span>`).join('')}</div>
+  </div>
+  <div class="art"><img class="bob" src="${A}hero-mascot.webp" alt="Kin, mascote">
+    <span class="sticker s1">100% não é IA</span><span class="sticker s2">criador certificado<br>pela internet</span><span class="sticker s3">aprovado pela<br>minha mãe ★</span></div>
+</header>
+${band(['Games', 'Memes', 'Nostalgia', 'Creepypastas', 'Humor duvidoso', 'Gameplay'])}
+${sec('Quem é esse cara', `<div class="about"><div class="foto tilt"><img src="foto-kin.webp" alt="${D.nomeReal}"><img class="stk" src="${A}kin-face-sm.webp" alt=""></div><p>${D.sobre}</p></div>`, 'spoiler: é o cara do desenho, só que em live action')}
+${sec('Os números', `<div class="stats">${D.numeros.map(x => `<div class="stat"><div class="n">${x.n}</div><div class="l">${x.l}</div><div class="s">${x.s}</div></div>`).join('')}</div><p class="note">Dados reais, atualizados em ${D.atualizado}. Juro.</p>`, 'pequeno sim, mas crescendo igual pão de queijo no forno 📈')}
+${sec('Onde me achar', `<div class="plats">${D.plataformas.map(p => `<div class="plat"><h3>${p.nome}</h3><div class="h">${p.handle}</div><div class="big">${p.numero} <small style="font-size:15px;opacity:.8">${p.unidade}</small></div><ul>${p.extras.map(e => `<li>• ${e}</li>`).join('')}</ul></div>`).join('')}</div>`, 'em todo lugar, que nem meme de 2012')}
+${sec('Quem me assiste', `
+<div class="resumo">${D.resumo.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}<em>média das redes</em></div>
+<div class="redes">${D.publico.map(p => `<div class="rede"><h3>${p.rede}${p.obs ? ` <small>· ${p.obs}</small>` : ''}</h3>${p.idade.length ? `<h4>Idade</h4>${bars(p.idade)}<h4>Gênero</h4>${bars(p.genero)}` : `<div class="soon"><img src="${A}kin-face-sm.webp" alt=""><p>O YouTube ainda tá me achando pequeno demais pra mostrar esses dados. Em breve!</p></div>`}</div>`).join('')}</div>
+<div class="aud" style="margin-top:28px"><div><h3 style="margin-bottom:14px">Principais países</h3><div class="chips">${D.paises.map(c => `<span>${c}</span>`).join('')}</div></div><div><h3 style="margin-bottom:14px">Temas do canal</h3><div class="chips">${D.temas.map(c => `<span>${c}</span>`).join('')}</div></div></div>
+${D.fonte ? `<p class="note">${D.fonte}</p>` : ''}`,'jovens adultos que cresceram na internet (tipo eu)')}
+${sec('Os hits', (() => {
+  const P = { yt: 'YouTube', ig: 'Instagram · Reel', tt: 'TikTok' };
+  const yt = D.destaques.filter(v => v.plat === 'yt'), sh = D.destaques.filter(v => v.plat !== 'yt');
+  return `<div class="vids-yt">${yt.map(v => `<a class="vid wide" href="${v.url}" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt=""><div><small class="pl">▶ ${P.yt}</small>${v.titulo}<small>Assistir no YouTube →</small></div></a>`).join('')}</div>
+  <div class="vids-sh">${sh.map(v => `<a class="sh ${v.plat}" href="${v.url}" target="_blank" rel="noopener"><img src="${A}kin-face.webp" alt=""><span class="pl">${P[v.plat]}</span><span class="pt">▶</span><b>${v.titulo}</b></a>`).join('')}</div>`;
+})(), 'aperta o play, não custa nada (literalmente)')}
+${band(['Sua marca aqui', 'Sua marca aqui', 'Sério, aqui mesmo'])}
+${sec('Ideias de parceria', `<div class="svc">${D.servicos.map(s => `<div class="card"><h3>${s.t}</h3><p>${s.d}</p><div class="price">${s.p}</div></div>`).join('')}</div>`, 'algumas ideias, mas tô aberto a qualquer proposta (até dançar trend, se precisar)')}
+<section class="contact">
+  <img class="peek" src="${A}footer-right.webp" alt="">
+  <h2>Bora fazer algo juntos?</h2>
+  <p>Me chama que eu respondo mais rápido que corte de TikTok.</p>
+  <div class="row"><a href="mailto:${D.contato.email}">${D.contato.email}</a><a href="${D.contato.portfolio}" target="_blank" rel="noopener">Ver portfólio</a><a href="${D.contato.instagram}" target="_blank" rel="noopener">Instagram</a></div>
+  <p class="upd">Fim do mídia kit. Pode fechar a aba agora (mas manda o e-mail antes) · atualizado em ${D.atualizado}</p>
+</section>`;
+</script>
+</body>
+</html>
